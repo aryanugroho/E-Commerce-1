@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
+import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
 @Entity
+@Embeddable
 @Table(name = "cart")
 @NamedNativeQueries({
 	@NamedNativeQuery(
