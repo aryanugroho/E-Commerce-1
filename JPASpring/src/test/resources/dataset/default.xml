@@ -1,0 +1,7 @@
+
+
+<dataset>
+	<ship_to ship_to_id="1" name="Jorge Gonzalez" address="Ensenada" />
+	<ship_to ship_to_id="2" name="Jorge Gonzalez" address="Col. Obrera" />
+	<ship_to ship_to_id="3" name="Jesus Gonzalez" address="Fracc. Rosales" />
+</dataset>
