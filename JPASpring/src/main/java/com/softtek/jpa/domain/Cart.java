@@ -16,7 +16,6 @@ import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
 @Entity
-@Embeddable
 @Table(name = "cart")
 @NamedNativeQueries({
 	@NamedNativeQuery(
