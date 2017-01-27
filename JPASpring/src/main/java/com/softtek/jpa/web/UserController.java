@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.softtek.jpa.domain.User;
-import com.softtek.jpa.domain.UserRole;
-import com.softtek.jpa.services.UserRolService;
 import com.softtek.jpa.services.UserService;
 
 @RequestMapping(value = "/user")
@@ -30,9 +28,6 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-
-	@Autowired
-	UserRolService userRoleService;
 
 	@RequestMapping(value = "/list")
 	public String List() {
@@ -62,12 +57,12 @@ public class UserController {
 
 	@RequestMapping(value = "/edituser", method = RequestMethod.GET)
 	public String editUser(@RequestParam String username, @RequestParam String status, HttpServletRequest request) {
-		User user = userService.user(username);
-		List<UserRole> userRoleList = userRoleService.userRoleList();
-		List<String> listStatus = userRoleService.statusList();
+		User user = userService.findUser(username);
+//		List<UserRole> userRoleList = userRoleService.userRoleList();
+//		List<String> listStatus = userRoleService.statusList();
 		request.setAttribute("users", user);
-		request.setAttribute("userRole", userRoleList);
-		request.setAttribute("listStatus", listStatus);
+//		request.setAttribute("userRole", userRoleList);
+//		request.setAttribute("listStatus", listStatus);
 		request.setAttribute("status", status);
 		return "edituser";
 	}
@@ -77,7 +72,7 @@ public class UserController {
 		return null;
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateUser(@ModelAttribute User user, HttpServletRequest request) {
 
 		final String user_role_id = new String(request.getParameter("userRole"));
@@ -85,7 +80,7 @@ public class UserController {
 			return "redirect:/User/List";
 		}
 		return "redirect:/User/edit?username=" + user.getUsername() + "&status=Not valid";
-	}
+	}*/
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addUser(@ModelAttribute User user, @RequestParam String userRoleId,

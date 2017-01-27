@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.softtek.jpa.domain.Cart;
-import com.softtek.jpa.domain.ShipTo;
 import com.softtek.jpa.domain.Status;
 import com.softtek.jpa.services.CartService;
-import com.softtek.jpa.services.ShipToService;
 import com.softtek.jpa.services.StatusService;
 
 @RequestMapping(value = "/cart")
@@ -30,10 +28,7 @@ public class CartController {
 	CartService cartService;
 
 	@Autowired
-	StatusService statusService;;
-
-	@Autowired
-	ShipToService shipToService;
+	StatusService statusService;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String root() {
@@ -59,10 +54,10 @@ public class CartController {
 	public String editCart(@RequestParam Long cartId, @RequestParam String status, HttpServletRequest request) {
 		Cart cart = cartService.cart(cartId);
 		List<Status> cartStatus = statusService.statusList("CART");
-		List<ShipTo> shipTos = shipToService.shipToList();
+		//List<ShipTo> shipTos = shipToService.shipToList();
 		request.setAttribute("cart", cart);
 		request.setAttribute("cartStatus", cartStatus);
-		request.setAttribute("shipTos", shipTos);
+		//request.setAttribute("shipTos", shipTos);
 		request.setAttribute("status", status);
 		return "editcart";
 	}

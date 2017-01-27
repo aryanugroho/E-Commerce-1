@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.softtek.jpa.domain.User;
-import com.softtek.jpa.domain.UserRole;
 import com.softtek.jpa.repository.UserRepository;
 
 @Service
@@ -22,56 +21,39 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User user(String username) {
+	public User findUser(String username) {
 		// TODO Auto-generated method stub
-		return userRepository.user(username);
+		return userRepository.findUser(username);
 	}
 
-	@Override
-	public boolean update(User user, String user_role_id) {
-		// TODO Auto-generated method stub
-		
-		user.setRole(new UserRole(user_role_id,""));
-		if(isValidUser(user)){
-			userRepository.save(user);
-			return true;
-		}
-		return false;
-	}
-	
+	/*
+	 * @Override public boolean update(User user, String user_role_id) { // TODO
+	 * Auto-generated method stub
+	 * 
+	 * user.setRole(new UserRole(user_role_id,"")); if(isValidUser(user)){
+	 * userRepository.save(user); return true; } return false; }
+	 */
 
-
-	private Boolean isValidUser(final User user) {
-
-		if (user.getName() == null || user.getName().isEmpty()) {
-			System.out.println(1);
-			return false;
-		}
-
-		if (user.getStatus()== null || user.getStatus().isEmpty()  ) {
-			System.out.println(2);
-			return false;
-		}
-
-		if(user.getUsername()==null){
-			System.out.println(3);
-			return false;
-		}
-		if(user.getRole()==null || user.getRole().getUser_roleid().isEmpty()){			System.out.println(4);
-			return false;
-		}
-		System.out.println(user.getPassword());
-		if(user.getPassword()==null||user.getPassword().isEmpty()){
-			System.out.println(1);
-			return false;
-		}
-		return true;
-	}
+	/*
+	 * private Boolean isValidUser(final User user) {
+	 * 
+	 * if (user.getName() == null || user.getName().isEmpty()) {
+	 * System.out.println(1); return false; }
+	 * 
+	 * if (user.getStatus()== null || user.getStatus().isEmpty() ) {
+	 * System.out.println(2); return false; }
+	 * 
+	 * if(user.getUsername()==null){ System.out.println(3); return false; }
+	 * if(user.getRole()==null || user.getRole().getUser_roleid().isEmpty()){
+	 * System.out.println(4); return false; }
+	 * System.out.println(user.getPassword());
+	 * if(user.getPassword()==null||user.getPassword().isEmpty()){
+	 * System.out.println(1); return false; } return true; }
+	 */
 
 	@Override
 	public List<User> duplicateUser(String name) {
-		return userRepository.duplicateUser(name);	
+		return userRepository.duplicateUser(name);
 	}
-	
 
 }

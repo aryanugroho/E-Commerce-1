@@ -1,7 +1,4 @@
-
-
 <dataset>
-	<ship_to ship_to_id="1" name="Jorge Gonzalez" address="Ensenada" />
-	<ship_to ship_to_id="2" name="Jorge Gonzalez" address="Col. Obrera" />
-	<ship_to ship_to_id="3" name="Jesus Gonzalez" address="Fracc. Rosales" />
+	<users username="ramonlm" password="password" name="name" address="Segunda 1798" city="Ensenada"
+		  zipcode="22830" country="Mexico" phone="6461071315" email="ramon@correo.com" />
 </dataset>

@@ -1,4 +1,4 @@
-package com.softtek.jpa.services;
+/*package com.softtek.jpa.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,4 +79,4 @@ public class UserControllerTest {
 		Assert.assertTrue(status == 204);
 	}
 
-}
+}*/

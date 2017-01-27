@@ -1,51 +1,54 @@
-CREATE TABLE 'ORDER' (
-'order_id' INTEGER NOT NULL,
-'username' VARCHAR(20) NOT NULL,
-'quantity' INTEGER UNSIGNED NOT NULL,
-'total' INTEGER UNSIGNED NOT NULL,
-'status_id' INTEGER NOT NULL,
-'order_date' DATE,
-'expected_date' DATE,
-PRIMARY KEY('order_id'),
-CONSTRAINT 'fk_user_order' FOREIGN KEY ('username') REFERENCES 'USER' ('username') ON UPDATE CASCADE ON DELETE SET NULL,
-CONSTRAINT 'fk_status_order' FOREIGN KEY ('status_id') REFERENCES 'STATUS' ('status_id') ON UPDATE CASCADE ON DELETE SET NULL
+CREATE TABLE  STATUS  (
+ status_id  INTEGER NOT NULL,
+ description  VARCHAR(100),
+ status_type  VARCHAR(20),
+PRIMARY KEY( status_id )
 );
 
-CREATE TABLE 'STATUS' (
-'status_id' INTEGER NOT NULL,
-'description' VARCHAR(100) DEFAULT NULL,
-'status_type' VARCHAR(20) DEFAULT NULL,
-PRIMARY KEY('status_id')
+CREATE TABLE  USERS  (
+ username  VARCHAR(20) NOT NULL,
+ password  VARCHAR(20),
+ name  VARCHAR(50),
+ address  VARCHAR(150) NOT NULL,
+ city  VARCHAR(30) NOT NULL,
+ zipcode  INTEGER,
+ country  VARCHAR(30) NOT NULL,
+ phone  VARCHAR(20),
+ email  VARCHAR(50),
+PRIMARY KEY( username )
 );
 
-CREATE TABLE 'USER' (
-'username' VARCHAR(20) NOT NULL,
-'password' VARCHAR(20) DEFAULT NULL,
-'name' VARCHAR(50) DEFAULT NULL,
-'address' VARCHAR(150) NOT NULL,
-'city' VARCHAR(30) NOT NULL,
-'zipcode' INTEGER,
-'country' VARCHAR(30) NOT NULL DEFAULT 'Mexico',
-'phone' VARCHAR(20),
-'email' VARCHAR(50)
-PRIMARY KEY('username')
+CREATE TABLE  PRODUCTS (
+ product_id  INTEGER NOT NULL,
+ name  VARCHAR(100) NOT NULL,
+ description  VARCHAR(250) NOT NULL,
+ price  INTEGER UNSIGNED NOT NULL,
+ discount  INTEGER UNSIGNED NOT NULL,
+ stock  INTEGER UNSIGNED NOT NULL,
+PRIMARY KEY( product_id )
 );
 
-CREATE TABLE 'PRODUCT'(
-'product_id' INTEGER NOT NULL,
-'name' VARCHAR(100) NOT NULL,
-'description' VARCHAR(250) NOT NULL,
-'price' INTEGER UNSIGNED NOT NULL,
-'discount' INTEGER UNSIGNED NOT NULL DEFAULT '0',
-'stock' INTEGER UNSIGNED NOT NULL,
-PRIMARY KEY('product_id')
+CREATE TABLE ORDERS (
+ order_id  INTEGER NOT NULL,
+ username  VARCHAR(20) NOT NULL,
+ quantity  INTEGER UNSIGNED NOT NULL,
+ total  INTEGER UNSIGNED NOT NULL,
+ status_id  INTEGER NOT NULL,
+ shipping_name  VARCHAR(50) NOT NULL,
+ shipping_address  VARCHAR(150) NOT NULL,
+ shipping_cost  INTEGER UNSIGNED NOT NULL,
+ order_date  DATE,
+ expected_date  DATE,
+PRIMARY KEY( order_id ),
+CONSTRAINT  fk_user_order  FOREIGN KEY ( username ) REFERENCES  USERS  ( username ) ON UPDATE CASCADE ON DELETE SET NULL,
+CONSTRAINT  fk_status_order  FOREIGN KEY ( status_id ) REFERENCES  STATUS  ( status_id ) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
-CREATE TABLE 'CART'(
-'cart_id' INTEGER NOT NULL,
-'product_id' INTEGER NOT NULL,
-'quantity' INTEGER UNSIGNED NOT NULL,
-PRIMARY KEY ('cart_id'),
-CONSTRAINT 'fk_order_cart' FOREIGN KEY ('cart_id') REFERENCES 'ORDER' ('order_id') ON UPDATE CASCADE ON DELETE CASCADE,
-CONSTRAINT 'fk_product_cart' FOREIGN KEY ('product_id') REFERENCES 'PRODUCT' ('product_id') ON UPDATE CASCADE ON DELETE CASCADE
+CREATE TABLE  CARTS (
+ cart_id  INTEGER NOT NULL,
+ product_id  INTEGER NOT NULL,
+ quantity  INTEGER UNSIGNED NOT NULL,
+PRIMARY KEY ( cart_id ),
+CONSTRAINT  fk_order_cart  FOREIGN KEY ( cart_id ) REFERENCES  ORDERS  ( order_id ) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT  fk_product_cart  FOREIGN KEY ( product_id ) REFERENCES  PRODUCTS  ( product_id ) ON UPDATE CASCADE ON DELETE CASCADE
 );
