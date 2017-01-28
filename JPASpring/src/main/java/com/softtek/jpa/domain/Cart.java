@@ -115,7 +115,7 @@ public class Cart implements Serializable {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).add("id", id).add("cartDetails", cartDetails).toString();
+		return "Cart [id=" + id + ", cartDetails=" + cartDetails + "]";
 	}
 
 }

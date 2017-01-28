@@ -2,11 +2,14 @@ package com.softtek.jpa.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -16,9 +19,13 @@ public class OrderDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@OneToMany
+	@JoinColumn(name="cart_id")
+	private List<Cart> cartId;
+	
 	@ManyToOne
 	@JoinColumn(name = "username", nullable = false)
-	private User user;
+	private Users user;
 
 	@Column(name = "quantity", nullable = false)
 	private int itemQuantity;
@@ -26,7 +33,7 @@ public class OrderDetails implements Serializable {
 	@Column(name = "total", nullable = false)
 	private float orderTotal;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "status_id", nullable = false)
 	private Status status;
 
@@ -49,7 +56,7 @@ public class OrderDetails implements Serializable {
 		super();
 	}
 
-	public OrderDetails(User user, int itemQuantity, float orderTotal, Status status, String shippingName,
+	public OrderDetails(Users user, int itemQuantity, float orderTotal, Status status, String shippingName,
 			String shippingAddress, float shippingCost, Date orderDate, Date expectedDate) {
 		super();
 		this.user = user;
@@ -82,14 +89,6 @@ public class OrderDetails implements Serializable {
 					&& Objects.equal(this.expectedDate, that.expectedDate);
 		}
 		return false;
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("user", user).add("itemQuantity", itemQuantity)
-				.add("orderTotal", orderTotal).add("status", status).add("shippingName", shippingName)
-				.add("shippingAddress", shippingAddress).add("shippingCost", shippingCost).add("orderDate", orderDate)
-				.add("expectedDate", expectedDate).toString();
 	}
 	
 	

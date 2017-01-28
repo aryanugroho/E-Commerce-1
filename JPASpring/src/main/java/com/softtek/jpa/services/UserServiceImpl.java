@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.softtek.jpa.domain.User;
+import com.softtek.jpa.domain.Users;
 import com.softtek.jpa.repository.UserRepository;
 
 @Service
@@ -15,13 +15,13 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public List<User> userList() {
+	public List<Users> userList() {
 		// TODO Auto-generated method stub
 		return userRepository.userList();
 	}
 
 	@Override
-	public User findUser(String username) {
+	public Users findUser(String username) {
 		// TODO Auto-generated method stub
 		return userRepository.findUser(username);
 	}
@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService {
 	 * System.out.println(1); return false; } return true; }
 	 */
 
-	@Override
-	public List<User> duplicateUser(String name) {
-		return userRepository.duplicateUser(name);
-	}
+//	@Override
+//	public List<Users> duplicateUser(String name) {
+//		return userRepository.duplicateUser(name);
+//	}
 
 }

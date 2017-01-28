@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.google.common.base.MoreObjects;
@@ -17,7 +18,11 @@ public class CartDetails implements Serializable {
 
 	@OneToOne
 	@JoinColumn(name = "product_id")
-	private int productId;
+	private Product productId;
+	
+	@ManyToOne
+	@JoinColumn(name="order_id")
+	private Order orderId;
 
 	@Column(name = "quantity")
 	private int productQuantity;
@@ -26,17 +31,17 @@ public class CartDetails implements Serializable {
 		super();
 	}
 
-	public CartDetails(int productId, int productQuantity) {
+	public CartDetails(Product productId, int productQuantity) {
 		super();
 		this.productId = productId;
 		this.productQuantity = productQuantity;
 	}
 
-	public int getProductId() {
+	public Product getProductId() {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public void setProductId(Product productId) {
 		this.productId = productId;
 	}
 
@@ -61,12 +66,6 @@ public class CartDetails implements Serializable {
 					&& Objects.equal(this.productQuantity, that.productQuantity);
 		}
 		return false;
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("productId", productId).add("productQuantity", productQuantity)
-				.toString();
 	}
 
 }

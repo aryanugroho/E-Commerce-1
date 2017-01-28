@@ -24,7 +24,7 @@ public class Order implements Serializable {
 		super();
 	}
 
-	public Order(Long id, User user, int itemQuantity, float orderTotal, Status status, String shippingName,
+	public Order(Long id, Users user, int itemQuantity, float orderTotal, Status status, String shippingName,
 			String shippingAddress, float shippingCost, Date orderDate, Date expectedDate) {
 		super();
 		this.id = new OrderKey(id);

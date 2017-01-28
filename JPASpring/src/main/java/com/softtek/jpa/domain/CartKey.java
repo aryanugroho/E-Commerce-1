@@ -2,17 +2,16 @@ package com.softtek.jpa.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 
 @Embeddable
 public class CartKey implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	@JoinColumn(name = "cart_id", unique = true, nullable = false)
+	@Column(name = "cart_id", unique = true, nullable = false)
 	private Long id;
 
 	public CartKey() {

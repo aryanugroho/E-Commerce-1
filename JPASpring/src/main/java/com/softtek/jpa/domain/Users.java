@@ -1,14 +1,17 @@
 package com.softtek.jpa.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
@@ -21,69 +24,48 @@ import com.google.common.base.Objects;
 
 @NamedNativeQueries({
 
-		@NamedNativeQuery(
-				name = "findUsers", 
-				query = "SELECT u.username as username, " + 
-						"u.password as password, " +
-						"u.name as name, " + 
-						"u.address as address, " +
-						"u.city as city, " +
-						"u.zipcode as zipcode, " +
-						"u.country as country, " +
-						"u.phone as phone, " +
-						"u.email as email " +
-						"FROM user u", resultSetMapping = "UsersMapping"),
+		@NamedNativeQuery(name = "findUsers", query = "SELECT u.username as username, " + "u.password as password, "
+				+ "u.name as name, " + "u.address as address, " + "u.city as city, " + "u.zipcode as zipcode, "
+				+ "u.country as country, " + "u.phone as phone, " + "u.email as email "
+				+ "FROM users u", resultSetMapping = "UsersMapping"),
 
-		@NamedNativeQuery(
-				name = "findOneUser",
-				query = "SELECT u.username as username, " + 
-						"u.password as password, " +
-						"u.name as name, " + 
-						"u.address as address, " +
-						"u.city as city, " +
-						"u.zipcode as zipcode, " +
-						"u.country as country, " +
-						"u.phone as phone, " +
-						"u.email as email " +
-						"FROM user u " +
-						"WHERE u.username = :username", resultSetMapping = "UserMapping"),
+		@NamedNativeQuery(name = "findOneUser", query = "SELECT u.username as username, " + "u.password as password, "
+				+ "u.name as name, " + "u.address as address, " + "u.city as city, " + "u.zipcode as zipcode, "
+				+ "u.country as country, " + "u.phone as phone, " + "u.email as email " + "FROM users u "
+				+ "WHERE u.username = :username", resultSetMapping = "UserMapping"),
 
-		@NamedNativeQuery(
-				name = "update", 
-				query = "UPDATE user u, " + 
-						"SET u.password = :password, " +
-						"u.name = :name, " + 
-						"u.active = :active, " + 
-						"u.user_role_id = (SELECT user_role_id FROM user_role WHERE user_role_id = :id) " +
-						"WHERE u.username = :oldusername", resultSetMapping = "updateResult") })
+		@NamedNativeQuery(name = "update", query = "UPDATE user u, " + "SET u.password = :password, "
+				+ "u.name = :name, " + "u.active = :active, "
+				+ "u.user_role_id = (SELECT user_role_id FROM user_role WHERE user_role_id = :id) "
+				+ "WHERE u.username = :oldusername", resultSetMapping = "updateResult") })
 
 @SqlResultSetMappings({
 
 		@SqlResultSetMapping(name = "UsersMapping", classes = {
 
-				@ConstructorResult(targetClass = User.class, columns = {
+				@ConstructorResult(targetClass = Users.class, columns = {
 
 						@ColumnResult(name = "username", type = String.class),
 
 						@ColumnResult(name = "password", type = String.class),
 
 						@ColumnResult(name = "name", type = String.class),
-						
+
 						@ColumnResult(name = "address", type = String.class),
-						
+
 						@ColumnResult(name = "city", type = String.class),
-						
+
 						@ColumnResult(name = "zipcode", type = Integer.class),
-						
+
 						@ColumnResult(name = "country", type = String.class),
-						
+
 						@ColumnResult(name = "phone", type = String.class),
 
 						@ColumnResult(name = "email", type = String.class) }) }),
 
 		@SqlResultSetMapping(name = "UserMapping", classes = {
 
-				@ConstructorResult(targetClass = User.class, columns = {
+				@ConstructorResult(targetClass = Users.class, columns = {
 
 						@ColumnResult(name = "username", type = String.class),
 
@@ -99,13 +81,17 @@ import com.google.common.base.Objects;
 
 		@SqlResultSetMapping(name = "updateResult", columns = { @ColumnResult(name = "count") }) })
 
-public class User implements Serializable {
+public class Users implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "username", unique = true, nullable = false)
 	private String username;
+
+	@OneToMany
+	@JoinColumn(name = "order_id")
+	private List<Order> orderId;
 
 	@Column(name = "password", nullable = false)
 	private String password;
@@ -131,12 +117,12 @@ public class User implements Serializable {
 	@Column(name = "email")
 	private String email;
 
-	public User() {
+	public Users() {
 		super();
 	}
 
-	public User(String username, String password, String name, String address, String city, int zipcode, String country,
-			String phone, String email) {
+	public Users(String username, String password, String name, String address, String city, int zipcode,
+			String country, String phone, String email) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -228,8 +214,8 @@ public class User implements Serializable {
 
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof User) {
-			User that = (User) object;
+		if (object instanceof Users) {
+			Users that = (Users) object;
 			return Objects.equal(this.username, that.username) && Objects.equal(this.password, that.password)
 					&& Objects.equal(this.name, that.name) && Objects.equal(this.address, that.address)
 					&& Objects.equal(this.city, that.city) && Objects.equal(this.zipcode, that.zipcode)
@@ -241,9 +227,9 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).add("username", username).add("password", password).add("name", name)
-				.add("address", address).add("city", city).add("zipcode", zipcode).add("country", country)
-				.add("phone", phone).add("email", email).toString();
+		return "Users [username=" + username + ", orderId=" + orderId + ", password=" + password + ", name=" + name
+				+ ", address=" + address + ", city=" + city + ", zipcode=" + zipcode + ", country=" + country
+				+ ", phone=" + phone + ", email=" + email + "]";
 	}
 
 }

@@ -63,8 +63,5 @@ public class Status implements Serializable {
 		this.type = type;
 	}
 
-	@Override
-	public String toString() {
-		return "Status [id=" + id + ", description=" + description + ", type=" + type + "]";
-	}
+	
 }

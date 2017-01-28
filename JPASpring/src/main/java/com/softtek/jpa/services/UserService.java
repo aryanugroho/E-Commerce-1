@@ -2,13 +2,13 @@ package com.softtek.jpa.services;
 
 import java.util.List;
 
-import com.softtek.jpa.domain.User;
+import com.softtek.jpa.domain.Users;
 
 public interface UserService {
 	
-	public List<User> userList();
-	public User findUser(String username);
-	public List<User> duplicateUser(String name);
+	public List<Users> userList();
+	public Users findUser(String username);
+	//public List<Users> duplicateUser(String name);
 	//public boolean update(User user,String user_role_id);
 
 }
