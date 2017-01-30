@@ -2,66 +2,56 @@ package com.softtek.jpa.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @Entity
 @Table(name = "carts")
-/*
- * @NamedNativeQueries({
- * 
- * @NamedNativeQuery( name="findCarts", query="SELECT c.cart_id as cart_key, " +
- * "c.lines_amount as linesAmount, " + "c.shipping_amount as shippingAmount, " +
- * "c.cart_amount as cartAmount, " + "st.name as ship_to, " +
- * "c.ship_to_id as shipToId, " + "s.description as status, " +
- * "c.status_id as statusId, " + "c.create_date as createdate, " +
- * "c.update_date as updatedate " +" FROM cart c " +
- * " JOIN ship_to st ON st.ship_to_id = c.ship_to_id " +
- * " JOIN status s ON s.status_id = c.status_id ", resultSetMapping =
- * "CartsMapping"),
- * 
- * @NamedNativeQuery( name="findOneCart", query="SELECT c.cart_id as cart_key, "
- * + "c.lines_amount as linesAmount, " + "c.shipping_amount as shippingAmount, "
- * + "c.cart_amount as cartAmount, " + "st.name as ship_to, " +
- * "c.ship_to_id as shipToId, " + "s.description as status, " +
- * "c.status_id as statusId," + "c.create_date as createdate, " +
- * "c.update_date as updatedate "
- * 
- * +" FROM cart c " + " JOIN ship_to st ON st.ship_to_id = c.ship_to_id " +
- * " JOIN status s ON s.status_id = c.status_id " +
- * "WHERE c.cart_id = :cartId ", resultSetMapping = "CartsMapping") })
- * 
- * @SqlResultSetMappings({
- * 
- * @SqlResultSetMapping(name="CartsMapping", classes= {
- * 
- * @ConstructorResult( targetClass = Cart.class, columns = {
- * 
- * @ColumnResult(name = "cart_key", type = Long.class),
- * 
- * @ColumnResult(name = "linesAmount", type = Double.class),
- * 
- * @ColumnResult(name = "shippingAmount", type = Double.class),
- * 
- * @ColumnResult(name = "cartAmount", type = Double.class),
- * 
- * @ColumnResult(name = "ship_to", type= String.class),
- * 
- * @ColumnResult(name = "shipToId", type= Long.class),
- * 
- * @ColumnResult(name = "status", type = String.class),
- * 
- * @ColumnResult(name = "statusId", type= Long.class),
- * 
- * @ColumnResult(name = "createdate", type= Date.class),
- * 
- * @ColumnResult(name = "updatedate", type= Date.class) }) }) })
- */
+
+@NamedNativeQueries({
+
+		@NamedNativeQuery(
+				name = "findCarts", 
+				query = "SELECT c.cart_id as cartId, "
+						+ "c.order_id as orderId, "
+						+ "p.name as productName"
+						+ "c.quantity as quantity"
+						+ " FROM cart c "
+						+ " JOIN products p ON p.product_id = c.product_id ", resultSetMapping = "CartsMapping"),
+
+		@NamedNativeQuery(name = "findOneCart", query = "SELECT c.cart_id as cart_key, "
+				+ "c.lines_amount as linesAmount, " + "c.shipping_amount as shippingAmount, "
+				+ "c.cart_amount as cartAmount, " + "st.name as ship_to, " + "c.ship_to_id as shipToId, "
+				+ "s.description as status, " + "c.status_id as statusId," + "c.create_date as createdate, "
+				+ "c.update_date as updatedate "
+
+				+ " FROM cart c " + " JOIN ship_to st ON st.ship_to_id = c.ship_to_id "
+				+ " JOIN status s ON s.status_id = c.status_id "
+				+ "WHERE c.cart_id = :cartId ", resultSetMapping = "CartsMapping") })
+
+@SqlResultSetMappings({
+
+		@SqlResultSetMapping(name = "CartsMapping", classes = {
+
+				@ConstructorResult(targetClass = Cart.class, columns = {
+
+						@ColumnResult(name = "cartId", type = Long.class),
+
+						@ColumnResult(name = "orderId", type = Long.class),
+
+						@ColumnResult(name = "productName", type = String.class),
+
+						@ColumnResult(name = "quantity", type = Integer.class) }) }) })
 
 public class Cart implements Serializable {
 

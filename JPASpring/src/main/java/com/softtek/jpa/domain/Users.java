@@ -1,22 +1,18 @@
 package com.softtek.jpa.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @Entity
@@ -24,20 +20,41 @@ import com.google.common.base.Objects;
 
 @NamedNativeQueries({
 
-		@NamedNativeQuery(name = "findUsers", query = "SELECT u.username as username, " + "u.password as password, "
-				+ "u.name as name, " + "u.address as address, " + "u.city as city, " + "u.zipcode as zipcode, "
-				+ "u.country as country, " + "u.phone as phone, " + "u.email as email "
-				+ "FROM users u", resultSetMapping = "UsersMapping"),
+		@NamedNativeQuery(
+				name = "findUsers", 
+				query = "SELECT u.username as username, " 
+						+ "u.password as password, "
+						+ "u.name as name, " 
+						+ "u.address as address, " 
+						+ "u.city as city, " 
+						+ "u.zipcode as zipcode, "
+						+ "u.country as country, " 
+						+ "u.phone as phone, " 
+						+ "u.email as email "
+						+ "FROM users u", resultSetMapping = "UsersMapping"),
 
-		@NamedNativeQuery(name = "findOneUser", query = "SELECT u.username as username, " + "u.password as password, "
-				+ "u.name as name, " + "u.address as address, " + "u.city as city, " + "u.zipcode as zipcode, "
-				+ "u.country as country, " + "u.phone as phone, " + "u.email as email " + "FROM users u "
-				+ "WHERE u.username = :username", resultSetMapping = "UserMapping"),
+		@NamedNativeQuery(
+				name = "findOneUser", 
+				query = "SELECT u.username as username, " 
+						+ "u.password as password, "
+						+ "u.name as name, " 
+						+ "u.address as address, " 
+						+ "u.city as city, " 
+						+ "u.zipcode as zipcode, "
+						+ "u.country as country, " 
+						+ "u.phone as phone, "
+						+ "u.email as email " 
+						+ "FROM users u "
+						+ "WHERE u.username = :username", resultSetMapping = "UserMapping"),
 
-		@NamedNativeQuery(name = "update", query = "UPDATE user u, " + "SET u.password = :password, "
-				+ "u.name = :name, " + "u.active = :active, "
-				+ "u.user_role_id = (SELECT user_role_id FROM user_role WHERE user_role_id = :id) "
-				+ "WHERE u.username = :oldusername", resultSetMapping = "updateResult") })
+		@NamedNativeQuery(
+				name = "update",
+				query = "UPDATE user u, " 
+						+ "SET u.password = :password, "
+						+ "u.name = :name, " 
+						+ "u.active = :active, "
+						+ "u.user_role_id = (SELECT user_role_id FROM user_role WHERE user_role_id = :id) "
+						+ "WHERE u.username = :oldusername", resultSetMapping = "updateResult") })
 
 @SqlResultSetMappings({
 
@@ -73,11 +90,17 @@ import com.google.common.base.Objects;
 
 						@ColumnResult(name = "name", type = String.class),
 
-						@ColumnResult(name = "userRoleId", type = String.class),
+						@ColumnResult(name = "address", type = String.class),
 
-						@ColumnResult(name = "active", type = String.class),
+						@ColumnResult(name = "city", type = String.class),
 
-						@ColumnResult(name = "description", type = String.class) }) }),
+						@ColumnResult(name = "zipcode", type = Integer.class),
+
+						@ColumnResult(name = "country", type = String.class),
+
+						@ColumnResult(name = "phone", type = String.class),
+
+						@ColumnResult(name = "email", type = String.class) }) }),
 
 		@SqlResultSetMapping(name = "updateResult", columns = { @ColumnResult(name = "count") }) })
 
@@ -88,10 +111,6 @@ public class Users implements Serializable {
 	@Id
 	@Column(name = "username", unique = true, nullable = false)
 	private String username;
-
-	@OneToMany
-	@JoinColumn(name = "order_id")
-	private List<Order> orderId;
 
 	@Column(name = "password", nullable = false)
 	private String password;
@@ -227,7 +246,7 @@ public class Users implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Users [username=" + username + ", orderId=" + orderId + ", password=" + password + ", name=" + name
+		return "Users [username=" + username + ", password=" + password + ", name=" + name
 				+ ", address=" + address + ", city=" + city + ", zipcode=" + zipcode + ", country=" + country
 				+ ", phone=" + phone + ", email=" + email + "]";
 	}

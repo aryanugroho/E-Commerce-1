@@ -9,9 +9,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @Embeddable
@@ -19,10 +17,6 @@ public class OrderDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany
-	@JoinColumn(name="cart_id")
-	private List<Cart> cartId;
-	
 	@ManyToOne
 	@JoinColumn(name = "username", nullable = false)
 	private Users user;
@@ -33,7 +27,7 @@ public class OrderDetails implements Serializable {
 	@Column(name = "total", nullable = false)
 	private float orderTotal;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "status_id", nullable = false)
 	private Status status;
 
@@ -90,6 +84,5 @@ public class OrderDetails implements Serializable {
 		}
 		return false;
 	}
-	
-	
+
 }

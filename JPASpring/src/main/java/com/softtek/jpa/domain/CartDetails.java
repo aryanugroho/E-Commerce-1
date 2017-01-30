@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @Embeddable
@@ -19,9 +18,9 @@ public class CartDetails implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "product_id")
 	private Product productId;
-	
+
 	@ManyToOne
-	@JoinColumn(name="order_id")
+	@JoinColumn(name = "order_id")
 	private Order orderId;
 
 	@Column(name = "quantity")

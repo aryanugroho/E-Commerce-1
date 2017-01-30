@@ -16,13 +16,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<Users> userList() {
-		// TODO Auto-generated method stub
 		return userRepository.userList();
 	}
 
 	@Override
 	public Users findUser(String username) {
-		// TODO Auto-generated method stub
 		return userRepository.findUser(username);
 	}
 

@@ -16,6 +16,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.softtek.jpa.domain.Cart;
 import com.softtek.jpa.domain.Users;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,6 +27,8 @@ import com.softtek.jpa.domain.Users;
 public class UserServiceImplTest {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CartService cartService;
 	
 	@Test
 	@DatabaseSetup(value="/dataset/scenario1.xml", type=DatabaseOperation.CLEAN_INSERT)
@@ -35,7 +38,24 @@ public class UserServiceImplTest {
 		System.out.println(userList);
 		System.out.println(userList.size());
 		Assert.assertNotNull(userList);
-		
 	}
 
+	@Test
+	@DatabaseSetup(value="/dataset/scenario1.xml", type=DatabaseOperation.CLEAN_INSERT)
+	public void testUserFindService() {
+		Users foundUser;
+		String username = "ramonlm";
+		foundUser = userService.findUser("ramonlm");
+		System.out.println(foundUser);
+		Assert.assertEquals(username, foundUser.getUsername());
+	}
+	
+	@Test
+	@DatabaseSetup(value="/dataset/scenario1.xml", type=DatabaseOperation.CLEAN_INSERT)
+	public void testCartListService() {
+		List<Cart> cartList;
+		cartList = cartService.cartList();
+		System.out.println(cartList);
+		Assert.assertNotNull(cartList);
+	}
 }
