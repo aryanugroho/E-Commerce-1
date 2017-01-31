@@ -55,4 +55,9 @@ public class OrderKey implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderKey [id=" + id + "]";
+	}
+
 }

@@ -55,4 +55,9 @@ public class CartKey implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "CartKey [id=" + id + "]";
+	}
+
 }

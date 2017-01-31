@@ -13,8 +13,6 @@ import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
-import com.google.common.base.Objects;
-
 @Entity
 @Table(name = "users")
 
@@ -225,23 +223,76 @@ public class Users implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(username, password, name, address, city, zipcode, country, phone, email);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + zipcode;
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		if (object instanceof Users) {
-			Users that = (Users) object;
-			return Objects.equal(this.username, that.username) && Objects.equal(this.password, that.password)
-					&& Objects.equal(this.name, that.name) && Objects.equal(this.address, that.address)
-					&& Objects.equal(this.city, that.city) && Objects.equal(this.zipcode, that.zipcode)
-					&& Objects.equal(this.country, that.country) && Objects.equal(this.phone, that.phone)
-					&& Objects.equal(this.email, that.email);
-		}
-		return false;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Users other = (Users) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		if (zipcode != other.zipcode)
+			return false;
+		return true;
 	}
 
 	@Override

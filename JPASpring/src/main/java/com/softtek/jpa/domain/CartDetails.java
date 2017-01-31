@@ -8,20 +8,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.google.common.base.Objects;
-
 @Embeddable
 public class CartDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
-	@JoinColumn(name = "product_id")
-	private Product productId;
-
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order orderId;
+
+	@OneToOne
+	@JoinColumn(name = "product_id")
+	private Product productId;
 
 	@Column(name = "quantity")
 	private int productQuantity;
@@ -30,9 +28,10 @@ public class CartDetails implements Serializable {
 		super();
 	}
 
-	public CartDetails(Product productId, int productQuantity) {
+	public CartDetails(Long orderId, Long productId, int productQuantity) {
 		super();
-		this.productId = productId;
+		this.orderId = new Order(orderId);
+		this.productId = new Product(productId);
 		this.productQuantity = productQuantity;
 	}
 
@@ -54,17 +53,41 @@ public class CartDetails implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(productId, productQuantity);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + productQuantity;
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		if (object instanceof CartDetails) {
-			CartDetails that = (CartDetails) object;
-			return Objects.equal(this.productId, that.productId)
-					&& Objects.equal(this.productQuantity, that.productQuantity);
-		}
-		return false;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CartDetails other = (CartDetails) obj;
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
+			return false;
+		if (productQuantity != other.productQuantity)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "orderId=" + orderId.getId() + ", productId=" + productId.getProductId() + ", productQuantity=" + productQuantity;
 	}
 
 }

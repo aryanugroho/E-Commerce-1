@@ -13,8 +13,6 @@ import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
-import com.google.common.base.Objects;
-
 @Entity
 @Table(name = "carts")
 
@@ -24,10 +22,10 @@ import com.google.common.base.Objects;
 				name = "findCarts", 
 				query = "SELECT c.cart_id as cartId, "
 						+ "c.order_id as orderId, "
-						+ "p.name as productName"
-						+ "c.quantity as quantity"
-						+ " FROM cart c "
-						+ " JOIN products p ON p.product_id = c.product_id ", resultSetMapping = "CartsMapping"),
+						+ "c.product_id as productId, "
+						+ "c.quantity as quantity "
+						+ "FROM carts c "
+						+ "JOIN products p ON p.product_id = c.product_id", resultSetMapping = "CartsMapping"),
 
 		@NamedNativeQuery(name = "findOneCart", query = "SELECT c.cart_id as cart_key, "
 				+ "c.lines_amount as linesAmount, " + "c.shipping_amount as shippingAmount, "
@@ -49,7 +47,7 @@ import com.google.common.base.Objects;
 
 						@ColumnResult(name = "orderId", type = Long.class),
 
-						@ColumnResult(name = "productName", type = String.class),
+						@ColumnResult(name = "productId", type = Long.class),
 
 						@ColumnResult(name = "quantity", type = Integer.class) }) }) })
 
@@ -72,6 +70,11 @@ public class Cart implements Serializable {
 		this.id = id;
 		this.cartDetails = cartDetails;
 	}
+	
+	public Cart(Long cartId, Long orderId, Long productId, int quantity){
+		this.id = new CartKey(cartId);
+		this.cartDetails = new CartDetails(orderId, productId, quantity);
+	}
 
 	public CartKey getId() {
 		return id;
@@ -89,23 +92,41 @@ public class Cart implements Serializable {
 		this.cartDetails = cartDetails;
 	}
 
+
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(id, cartDetails);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cartDetails == null) ? 0 : cartDetails.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		if (object instanceof Cart) {
-			Cart that = (Cart) object;
-			return Objects.equal(this.id, that.id) && Objects.equal(this.cartDetails, that.cartDetails);
-		}
-		return false;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cart other = (Cart) obj;
+		if (cartDetails == null) {
+			if (other.cartDetails != null)
+				return false;
+		} else if (!cartDetails.equals(other.cartDetails))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", cartDetails=" + cartDetails + "]";
+		return "Cart [id=" + id.getId() + ", " + cartDetails + "]";
 	}
 
 }
