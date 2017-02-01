@@ -1,4 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<users username="ramonlm" password="password" name="name" address="Segunda 1798" city="Ensenada"
-		  zipcode="22830" country="Mexico" phone="6461071315" email="ramon@correo.com" />
+	<USERS username="ramonlm" password="password" name="name"
+		address="Segunda 1798" city="Ensenada" zipcode="22830" country="Mexico"
+		phone="6461071315" email="ramon@correo.com" />
+	<CARTS cart_id="1" order_id="1" product_id="1" quantity="3" />
+	<PRODUCTS product_id="1" name="Xbox One S 1TB"
+		description="Xbox One S 1TB - Limited Edition (Battlefield 1)" price="600"
+		discount="20" stock="100" />
+	<ORDERS order_id="1" username="ramonlm" quantity="5" total="5300"
+		status_id="1" shipping_name="Raymon" shipping_address="Forest Hill PL"
+		shipping_cost="0" order_date="2016-10-02 17:21:56" expected_date="2016-10-10 00:00:00" />
+	<STATUS status_id="1" description="In Progress" status_type="IP" />
 </dataset>

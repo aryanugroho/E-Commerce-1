@@ -58,7 +58,7 @@ import javax.persistence.Table;
 
 		@SqlResultSetMapping(name = "UsersMapping", classes = {
 
-				@ConstructorResult(targetClass = Users.class, columns = {
+				@ConstructorResult(targetClass = User.class, columns = {
 
 						@ColumnResult(name = "username", type = String.class),
 
@@ -80,7 +80,7 @@ import javax.persistence.Table;
 
 		@SqlResultSetMapping(name = "UserMapping", classes = {
 
-				@ConstructorResult(targetClass = Users.class, columns = {
+				@ConstructorResult(targetClass = User.class, columns = {
 
 						@ColumnResult(name = "username", type = String.class),
 
@@ -102,7 +102,7 @@ import javax.persistence.Table;
 
 		@SqlResultSetMapping(name = "updateResult", columns = { @ColumnResult(name = "count") }) })
 
-public class Users implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -134,11 +134,11 @@ public class Users implements Serializable {
 	@Column(name = "email")
 	private String email;
 
-	public Users() {
+	public User() {
 		super();
 	}
 
-	public Users(String username, String password, String name, String address, String city, int zipcode,
+	public User(String username, String password, String name, String address, String city, int zipcode,
 			String country, String phone, String email) {
 		super();
 		this.username = username;
@@ -249,7 +249,7 @@ public class Users implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		User other = (User) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;

@@ -5,6 +5,6 @@ import java.util.List;
 import com.softtek.jpa.domain.Cart;
 
 public interface CartService {
-	public List<Cart> cartList();
-	public Cart cart(Long cart_id);
+	public Cart findCartById(Long cart_id);
+	public List<Cart> getCartList();
 }

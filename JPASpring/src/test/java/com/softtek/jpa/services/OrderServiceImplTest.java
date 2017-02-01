@@ -16,34 +16,32 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.softtek.jpa.domain.User;
+import com.softtek.jpa.domain.Order;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(inheritLocations = true)
 @DatabaseSetup(value = { "/dataset/default.xml" }, type = DatabaseOperation.CLEAN_INSERT)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
-public class UserServiceImplTest {
+public class OrderServiceImplTest {
 	@Autowired
-	private UserService userService;
+	private OrderService orderService;
 
 	@Test
 	@DatabaseSetup(value = "/dataset/scenario1.xml", type = DatabaseOperation.CLEAN_INSERT)
-	public void testUserListService() {
-		List<User> userList;
-		userList = userService.userList();
-		System.out.println(userList);
-		System.out.println(userList.size());
-		Assert.assertNotNull(userList);
+	public void testOrderListService() {
+		List<Order> OrderList;
+		OrderList = orderService.getOrderList();
+		System.out.println(OrderList);
+		Assert.assertNotNull(OrderList);
 	}
 
 	@Test
 	@DatabaseSetup(value = "/dataset/scenario1.xml", type = DatabaseOperation.CLEAN_INSERT)
-	public void testUserFindService() {
-		User foundUser;
-		String username = "ramonlm";
-		foundUser = userService.findUser("ramonlm");
-		System.out.println(foundUser);
-		Assert.assertEquals(username, foundUser.getUsername());
+	public void testOrderFindService() {
+		Order foundOrder;
+		foundOrder = orderService.getOrderById(1L);
+		System.out.println(foundOrder);
+		Assert.assertNotNull(foundOrder);
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.softtek.jpa.domain.Users;
+import com.softtek.jpa.domain.User;
 import com.softtek.jpa.repository.UserRepository;
 
 @Service
@@ -15,12 +15,12 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public List<Users> userList() {
+	public List<User> userList() {
 		return userRepository.userList();
 	}
 
 	@Override
-	public Users findUser(String username) {
+	public User findUser(String username) {
 		return userRepository.findUser(username);
 	}
 

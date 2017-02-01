@@ -37,9 +37,9 @@
 	</bean>
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/ecomDB" />
-		<property name="username" value="rlopez" />
-		<property name="password" value="rlopez" />
+		<property name="url" value="jdbc:mysql://localhost:3306/portaldb" />
+		<property name="username" value="root" />
+		<property name="password" value="mysql" />
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />

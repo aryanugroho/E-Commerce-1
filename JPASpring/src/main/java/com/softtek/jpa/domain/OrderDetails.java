@@ -15,7 +15,7 @@ public class OrderDetails implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "username", nullable = false)
-	private Users user;
+	private User user;
 
 	@Column(name = "quantity", nullable = false)
 	private int itemQuantity;
@@ -46,7 +46,7 @@ public class OrderDetails implements Serializable {
 		super();
 	}
 
-	public OrderDetails(Users user, int itemQuantity, float orderTotal, Status status, String shippingName,
+	public OrderDetails(User user, int itemQuantity, float orderTotal, Status status, String shippingName,
 			String shippingAddress, float shippingCost, Date orderDate, Date expectedDate) {
 		super();
 		this.user = user;
@@ -131,6 +131,5 @@ public class OrderDetails implements Serializable {
 				+ ", shippingCost=" + shippingCost + ", orderDate=" + orderDate + ", expectedDate=" + expectedDate
 				+ "]";
 	}
-
 
 }

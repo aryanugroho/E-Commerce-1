@@ -39,9 +39,7 @@ CREATE TABLE ORDERS (
  shipping_cost  INTEGER UNSIGNED NOT NULL,
  order_date  DATE,
  expected_date  DATE,
-PRIMARY KEY( order_id ),
-CONSTRAINT  fk_user_order  FOREIGN KEY ( username ) REFERENCES  USERS  ( username ) ON UPDATE CASCADE ON DELETE SET NULL,
-CONSTRAINT  fk_status_order  FOREIGN KEY ( status_id ) REFERENCES  STATUS  ( status_id ) ON UPDATE CASCADE ON DELETE SET NULL
+PRIMARY KEY( order_id )
 );
 
 CREATE TABLE  CARTS (

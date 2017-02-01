@@ -7,16 +7,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.softtek.jpa.domain.Users;
+import com.softtek.jpa.domain.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, String> {
+public interface UserRepository extends JpaRepository<User, String> {
+	
+	/*
+	 * Repository that provides CRUD operations for User entity.
+	 */
 	
 	@Query(name = "findUsers", nativeQuery = true)
-	public List<Users> userList();
+	public List<User> userList();
 	
 	@Query(name = "findOneUser", nativeQuery = true)
-	public Users findUser(@Param ("username") String username);
+	public User findUser(@Param ("username") String username);
 	
 //	@Query(value = "SELECT u FROM Users AS u WHERE u.name= :name")
 //	public List<Users> duplicateUser(@Param ("name") String name);

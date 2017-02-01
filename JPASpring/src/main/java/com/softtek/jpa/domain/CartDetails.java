@@ -87,7 +87,8 @@ public class CartDetails implements Serializable {
 
 	@Override
 	public String toString() {
-		return "orderId=" + orderId.getId() + ", productId=" + productId.getProductId() + ", productQuantity=" + productQuantity;
+		return "CartDetails [orderId=" + orderId + ", productId=" + productId + ", productQuantity=" + productQuantity
+				+ "]";
 	}
 
 }

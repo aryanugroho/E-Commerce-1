@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.softtek.jpa.domain.Cart;
+import com.softtek.jpa.domain.CartKey;
 import com.softtek.jpa.repository.CartRepository;
 
 @Service
@@ -15,15 +16,15 @@ public class CartServiceImpl implements CartService {
 	CartRepository cartRepository;
 
 	@Override
-	public List<Cart> cartList() {
+	public List<Cart> getCartList() {
 		// TODO Auto-generated method stub
-		return cartRepository.cartList();
+		return cartRepository.findAll();
 	}
-
+	
 	@Override
-	public Cart cart(Long cart_id) {
+	public Cart findCartById(Long cart_id) {
 		// TODO Auto-generated method stub
-		return cartRepository.cart(cart_id);
+		return cartRepository.findOne(new CartKey(cart_id));
 	}
 
 }
