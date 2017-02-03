@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +20,14 @@ public class CartController {
 	CartService cartService;
 
 
+	// Returns the cart list views.
 	@RequestMapping(value = "/carts/list")
 	public String List() {
 		return "listcarts";
 	}
 
-	@RequestMapping(value = "/getcartlist", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	// Returns the list of carts with its foreign keys.
+	@RequestMapping(value = "/getcartlist", method = RequestMethod.GET)
 	public ResponseEntity<List<Cart>> cartList() {
 		List<Cart> cartList = cartService.getCartList();
 		System.out.println(cartList);

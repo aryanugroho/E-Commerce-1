@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +30,13 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	// User list view
 	@RequestMapping(value = "/list")
 	public String List() {
 		return "listusers";
 	}
 
+	// Returns a list of all registered users.
 	@RequestMapping(value = "/getuserlist", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> userList() {
 		List<User> users = userService.userList();
@@ -41,6 +45,15 @@ public class UserController {
 		}
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
+	
+	// Returns the current user logged in.
+	@RequestMapping(value = "/getCurrentUser")
+	public ResponseEntity<User> loggedUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user=userService.findUser(auth.getName());
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+
 
 //	@RequestMapping(value = "/find", method = RequestMethod.POST)
 //	public ResponseEntity<?> searchUser(@RequestBody String name) {

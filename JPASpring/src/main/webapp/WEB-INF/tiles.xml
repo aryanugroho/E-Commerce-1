@@ -61,6 +61,12 @@
 		<put-attribute name="title" value="Home Page" />
 		<put-attribute name="body" value="/WEB-INF/pages/cart/editcart.jsp" />
 	</definition>
+	
+	<!-- Login -->
+	<definition name="login" extends="base.definition">
+		<put-attribute name="title" value="Home Page" />
+		<put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+	</definition>
 
 
 </tiles-definitions>

@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 
+	// Main homepage
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String root() {
 		return "home";
 	}
 	
+	// Login form
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null)

@@ -18,6 +18,7 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
+	// Returns the list of products in JSON format.
 	@RequestMapping(value = "/getproductlist", method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> getProductList() {
 		List<Product> productList = productService.getProductList();
@@ -26,7 +27,8 @@ public class ProductController {
 		}
 		return new ResponseEntity<List<Product>>(productList, HttpStatus.OK);
 	}
-
+	
+	// Returns all product categories in JSON format. (No repeats and in ASC order)
 	@RequestMapping(value = "/getproductcategories", method = RequestMethod.GET)
 	public ResponseEntity<List<String>> getProductCategories() {
 		List<String> productCategories = productService.getProductCategories();

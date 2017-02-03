@@ -1,5 +1,6 @@
 <body>
-	<nav data-ng-app="myApp" data-ng-controller="homeController" class="navbar navbar-default navbar-fixed-top">
+	<nav data-ng-app="myApp" data-ng-controller="homeController"
+		class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
@@ -26,6 +27,7 @@
 							<li data-ng-repeat="c in categories"><a href="#">{{c}}</a></li>
 
 						</ul></li>
+					<li><a href="">Hello {{currentUser.username}}</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
