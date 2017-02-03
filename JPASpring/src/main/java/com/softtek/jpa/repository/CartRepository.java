@@ -7,5 +7,5 @@ import com.softtek.jpa.domain.Cart;
 import com.softtek.jpa.domain.CartKey;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart, CartKey>{
+public interface CartRepository extends JpaRepository<Cart, CartKey> {
 }

@@ -32,15 +32,18 @@ public class Product implements Serializable {
 	@Column(name = "stock", nullable = false)
 	private int stockAvailable;
 
+	@Column(name = "category", nullable = false)
+	private String category;
+
+	@Column(name = "imageurl")
+	private String imageUrl;
+
 	public Product() {
 		super();
 	}
 
-	public Product(Long productId) {
-		this.productId = productId;
-	}
-
-	public Product(Long productId, String name, String description, float price, float discount, int stockAvailable) {
+	public Product(Long productId, String name, String description, float price, float discount, int stockAvailable,
+			String category, String imageUrl) {
 		super();
 		this.productId = productId;
 		this.name = name;
@@ -48,6 +51,12 @@ public class Product implements Serializable {
 		this.price = price;
 		this.discount = discount;
 		this.stockAvailable = stockAvailable;
+		this.category = category;
+		this.imageUrl = imageUrl;
+	}
+
+	public Product(Long productId) {
+		this.productId = productId;
 	}
 
 	public Long getProductId() {
@@ -98,12 +107,30 @@ public class Product implements Serializable {
 		this.stockAvailable = stockAvailable;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + Float.floatToIntBits(discount);
+		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + Float.floatToIntBits(price);
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
@@ -120,12 +147,22 @@ public class Product implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
 		if (Float.floatToIntBits(discount) != Float.floatToIntBits(other.discount))
+			return false;
+		if (imageUrl == null) {
+			if (other.imageUrl != null)
+				return false;
+		} else if (!imageUrl.equals(other.imageUrl))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -147,7 +184,8 @@ public class Product implements Serializable {
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", name=" + name + ", description=" + description + ", price="
-				+ price + ", discount=" + discount + ", stockAvailable=" + stockAvailable + "]";
+				+ price + ", discount=" + discount + ", stockAvailable=" + stockAvailable + ", category=" + category
+				+ ", imageUrl=" + imageUrl + "]";
 	}
 
 }

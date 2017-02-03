@@ -5,7 +5,7 @@ app.controller('userController', function($scope, $http) {
 	$scope.getUserList = function() {
 		$http({
 			method : 'GET',
-			url : 'http://localhost:8080/jpaproject/user/getuserlist'
+			url : 'http://localhost:8080/portal/user/getuserlist'
 		}).success(function(data, status, headers, config) {
 			$scope.users = data;
 		}).error(function(data, status, headers, config) {
@@ -73,7 +73,7 @@ app.controller('cartController', function($scope, $http) {
 	$scope.getCartList = function() {
 		$http({
 			method : 'GET',
-			url : 'http://localhost:8080/jpaproject/cart/getcartlist'
+			url : 'http://localhost:8080/portal/cart/getcartlist'
 		}).success(function(data, status, headers, config) {
 			$scope.carts = data;
 			console.log($scope.carts);

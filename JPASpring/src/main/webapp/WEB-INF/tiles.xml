@@ -21,6 +21,7 @@
 			<add-attribute
 				value="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" />
 			<add-attribute value="/resources/js/angular-1.4.8/js/angular.js" />
+			<add-attribute value="/resources/js/angularHomeController.js" />
 		</put-list-attribute>
 		
 		<put-list-attribute name="stylesheets">
@@ -28,6 +29,7 @@
 			<add-attribute
 				value="http://getbootstrap.com/examples/carousel/carousel.css" />
 			<add-attribute value="http://codepen.io/zavoloklom/pen/IGkDz.css" />
+			<add-attribute value="/resources/css/style.css" />
 		</put-list-attribute>
 	</definition>
 

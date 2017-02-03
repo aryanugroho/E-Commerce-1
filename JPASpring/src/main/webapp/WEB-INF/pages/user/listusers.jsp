@@ -17,7 +17,7 @@
 </head>
 <body data-ng-app="webapp" data-ng-controller="userController">
 <br>
-	<h3 data-ng-click="getUserList()" style="color: blue; font-family: sans-serif;">User List:</h3>
+	<h3 style="color: blue; font-family: sans-serif;">User List:</h3>
 		
 	<a href="<c:url value="/User/create?status="/>">Add User</a> --- 
 	<a href="<c:url value="/User/home"/>">Return to Index</a>
