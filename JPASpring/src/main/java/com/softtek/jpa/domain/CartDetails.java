@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -16,6 +17,14 @@ public class CartDetails implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order orderId;
+	
+	public Order getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Order orderId) {
+		this.orderId = orderId;
+	}
 
 	@OneToOne
 	@JoinColumn(name = "product_id")

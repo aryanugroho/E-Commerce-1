@@ -20,6 +20,78 @@ public class OrderDetails implements Serializable {
 	@Column(name = "quantity", nullable = false)
 	private int itemQuantity;
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getItemQuantity() {
+		return itemQuantity;
+	}
+
+	public void setItemQuantity(int itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
+
+	public float getOrderTotal() {
+		return orderTotal;
+	}
+
+	public void setOrderTotal(float orderTotal) {
+		this.orderTotal = orderTotal;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public String getShippingName() {
+		return shippingName;
+	}
+
+	public void setShippingName(String shippingName) {
+		this.shippingName = shippingName;
+	}
+
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public float getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(float shippingCost) {
+		this.shippingCost = shippingCost;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public Date getExpectedDate() {
+		return expectedDate;
+	}
+
+	public void setExpectedDate(Date expectedDate) {
+		this.expectedDate = expectedDate;
+	}
+
 	@Column(name = "total", nullable = false)
 	private float orderTotal;
 

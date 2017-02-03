@@ -1,5 +1,5 @@
-<body data-ng-app="webapp" data-ng-controller="homeController">
-	<nav class="navbar navbar-default navbar-fixed-top">
+<body>
+	<nav data-ng-app="myApp" data-ng-controller="homeController" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"

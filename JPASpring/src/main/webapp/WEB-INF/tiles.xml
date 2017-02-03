@@ -20,7 +20,6 @@
 			<add-attribute value="http://codepen.io/zavoloklom/pen/IGkDz.js" />
 			<add-attribute
 				value="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js" />
-			<add-attribute value="/resources/js/angular-1.4.8/js/angular.js" />
 			<add-attribute value="/resources/js/angularHomeController.js" />
 		</put-list-attribute>
 		
